@@ -1,0 +1,32 @@
+{
+  "name": "noflo-yaml",
+  "description": "YAML handling components for the NoFlo flow-based programming environment",
+  "author": "Henri Bergius <henri.bergius@iki.fi>",
+  "version": "0.0.1",
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://github.com/bergie/noflo/raw/master/LICENSE"
+  }],
+  "engines": {
+    "node": ">=0.6.0"
+  },
+  "dependencies": {
+    "noflo": "0.1.x",
+    "js-yaml": "0.3.x",
+    "json2yaml": "1.x.x"
+  },
+  "devDependencies": {
+    "nodeunit": ">=0.6.0",
+    "coffeelint": "*"
+  },
+  "noflo": {
+    "components": {
+      "ParseYaml": "./components/ParseYaml.coffee",
+      "ToYaml": "./components/ToYaml.coffee"
+    }
+  },
+  "scripts": {
+    "pretest": "./node_modules/.bin/coffeelint -r components",
+    "test": "./node_modules/.bin/nodeunit test"
+  }
+}
