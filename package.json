@@ -20,6 +20,9 @@
     "coffeelint": "*"
   },
   "noflo": {
+    "graphs": {
+      "ParseFrontmatter": "./graphs/ParseFrontmatter.fbp"
+    },
     "components": {
       "ParseYaml": "./components/ParseYaml.coffee",
       "ToYaml": "./components/ToYaml.coffee"
