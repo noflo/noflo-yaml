@@ -1,0 +1,20 @@
+'/[\n]*[-]{3}[\n]/' -> DELIMITER SplitParts(SplitStr)
+Content(Split) OUT -> IN SplitParts(SplitStr)
+SplitParts() OUT -> IN GroupParts(GroupByPacket)
+GroupParts() OUT -> IN CollectParts(CollectGroups)
+
+'1=yaml' -> MAP MapParts(MapProperty)
+'2=body' -> MAP MapParts()
+CollectParts() OUT -> IN Simplify(SimplifyObject) OUT -> IN MapParts()
+'yaml' -> ACCEPT FilterProps(FilterProperty)
+'body' -> ACCEPT FilterProps()
+MapParts() OUT -> IN FilterProps() OUT -> IN SplitProps(Split)
+
+'yaml' -> KEY GetYaml(GetObjectKey)
+SplitProps() OUT -> IN GetYaml()
+GetYaml() OUT -> IN ParseYaml(yaml/ParseYaml)
+
+'body' -> KEY GetBody(GetObjectKey)
+'body' -> PROPERTY Results(SetPropertyValue)
+SplitProps() OUT -> IN GetBody() OUT -> VALUE Results()
+ParseYaml() OUT -> IN Results()
