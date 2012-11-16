@@ -1,5 +1,5 @@
 '/home/bergie/Projects/bergie/_posts/2012-11-09-distributing-noflo-components.md' -> IN Read(ReadFile)
 Read() OUT -> IN Clean(RemoveGroups)
 
-Clean() OUT -> CONTENT.IN Parse(yaml/ParseFrontmatter)
-Parse() RESULTS.OUT -> IN Display(Output)
+Clean() OUT -> CONTENT Parse(yaml/ParseFrontmatter)
+Parse() RESULTS -> IN Display(Output)

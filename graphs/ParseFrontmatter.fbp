@@ -1,3 +1,6 @@
+EXPORT=CONTENT.IN:CONTENT
+EXPORT=RESULTS.OUT:RESULTS
+
 '/[\n]*[-]{3}[\n]/' -> DELIMITER SplitParts(SplitStr)
 Content(Split) OUT -> IN SplitParts(SplitStr)
 SplitParts() OUT -> IN GroupParts(GroupByPacket)
