@@ -1,8 +1,12 @@
 EXPORT=CONTENT.IN:CONTENT
 EXPORT=RESULTS.OUT:RESULTS
 
+Content(Split) OUT -> IN FileName(ReadGroup)
+'path' -> PROPERTY SetFileName(SetPropertyValue)
+FileName() OUT -> VALUE SetFileName()
+
 '/[\n]*[-]{3}[\n]/' -> DELIMITER SplitParts(SplitStr)
-Content(Split) OUT -> IN SplitParts(SplitStr)
+Content() OUT -> IN Clean(RemoveGroups) OUT -> IN SplitParts(SplitStr)
 SplitParts() OUT -> IN GroupParts(GroupByPacket)
 GroupParts() OUT -> IN CollectParts(CollectGroups)
 
@@ -20,4 +24,4 @@ GetYaml() OUT -> IN ParseYaml(yaml/ParseYaml)
 'body' -> KEY GetBody(GetObjectKey)
 'body' -> PROPERTY Results(SetPropertyValue)
 SplitProps() OUT -> IN GetBody() OUT -> VALUE Results()
-ParseYaml() OUT -> IN Results()
+ParseYaml() OUT -> IN SetFileName() OUT -> IN Results()
