@@ -21,3 +21,11 @@ exports['test reading simple YAML array'] = (test) ->
 - two
 - three
 """
+
+exports['test reading an empty string'] = (test) ->
+  test.expect 1
+  [c, ins, out] = setupComponent()
+  out.once 'data', (data) ->
+    test.equal JSON.stringify(data), JSON.stringify({})
+    test.done()
+  ins.send ''

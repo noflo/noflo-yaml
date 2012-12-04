@@ -9,7 +9,11 @@ class ParseYaml extends noflo.Component
       out: new noflo.Port()
 
     @inPorts.in.on "data", (data) =>
-      @outPorts.out.send parser.load data
+      result = parser.load data
+      if result is null
+        @outPorts.out.send {}
+        return
+      @outPorts.out.send result
     @inPorts.in.on "disconnect", =>
       @outPorts.out.disconnect()
 

@@ -25,7 +25,8 @@
     },
     "components": {
       "ParseYaml": "./components/ParseYaml.coffee",
-      "ToYaml": "./components/ToYaml.coffee"
+      "ToYaml": "./components/ToYaml.coffee",
+      "ExtractFrontmatter": "./components/ExtractFrontmatter.coffee"
     }
   },
   "scripts": {
