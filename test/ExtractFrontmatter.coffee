@@ -15,7 +15,7 @@ exports['test reading a Front Matter file'] = (test) ->
   [c, ins, out] = setupComponent()
   out.once 'data', (data) ->
     test.ok data
-    test.equal data.head, "\nfoo: bar\n"
+    test.equal data.head, "\nfoo: bar"
     test.equal data.body, "hello\n"
     test.done()
 
@@ -58,4 +58,18 @@ exports['test reading a messy file'] = (test) ->
     test.done()
 
   fixture = fs.readFileSync "#{__dirname}/fixtures/complex2.html", 'utf-8'
+  ins.send fixture
+
+exports['test reading Markdown with subheadlines file'] = (test) ->
+  test.expect 5
+  [c, ins, out] = setupComponent()
+  out.once 'data', (data) ->
+    test.ok data
+    test.ok data.head
+    test.notEqual data.head.indexOf('layout: "post"'), -1
+    test.equal data.head.indexOf('Welcome'), -1
+    test.ok data.body
+    test.done()
+
+  fixture = fs.readFileSync "#{__dirname}/fixtures/complex3.markdown", 'utf-8'
   ins.send fixture
