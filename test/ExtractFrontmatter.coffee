@@ -22,6 +22,18 @@ exports['test reading a Front Matter file'] = (test) ->
   fixture = fs.readFileSync "#{__dirname}/fixtures/frontmatter.txt", 'utf-8'
   ins.send fixture
 
+exports['test reading empty Front Matter'] = (test) ->
+  test.expect 3
+  [c, ins, out] = setupComponent()
+  out.once 'data', (data) ->
+    test.ok data
+    test.equal data.head, ''
+    test.equal data.body, "hello\n"
+    test.done()
+
+  fixture = fs.readFileSync "#{__dirname}/fixtures/empty_frontmatter.txt", 'utf-8'
+  ins.send fixture
+
 exports['test reading a regular file'] = (test) ->
   test.expect 3
   [c, ins, out] = setupComponent()

@@ -16,7 +16,7 @@ class ExtractFrontmatter extends noflo.Component
   extract: (data) ->
     matcher = ///
       [\n]*-{3}        # Front Matter block starts
-      ([\w\W]+)        # YAML contents
+      ([\w\W]*)        # YAML contents
       [\n]-{3}[\n]        # Front Matter block ends
       ([\w\W]*)*       # Body
       ///
