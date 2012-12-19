@@ -1,4 +1,3 @@
  '/home/bergie/Projects/bergie/_posts/2012-11-09-distributing-noflo-components.md' -> IN Read(ReadFile)
-#'/home/bergie/Projects/bergie/_layouts/about.html' -> IN Read(ReadFile)
 Read() OUT -> CONTENT Parse(yaml/ParseFrontmatter)
 Parse() RESULTS -> IN Display(Output)

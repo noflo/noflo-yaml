@@ -3,7 +3,7 @@ EXPORT=RESULTS.OUT:RESULTS
 
 Content(Split) OUT -> IN FileName(ReadGroup)
 'path' -> PROPERTY SetFileName(SetPropertyValue)
-FileName() OUT -> VALUE SetFileName()
+FileName() GROUP -> VALUE SetFileName()
 
 Content() OUT -> IN Clean(RemoveGroups)
 Clean() OUT -> IN Extract(yaml/ExtractFrontmatter) OUT -> IN SplitProps(Split)
