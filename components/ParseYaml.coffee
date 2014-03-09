@@ -9,6 +9,8 @@ class ParseYaml extends noflo.Component
       out: new noflo.Port 'object'
       error: new noflo.Port 'object'
 
+    @inPorts.in.on 'begingroup', (group) =>
+      @outPorts.out.beginGroup group
     @inPorts.in.on "data", (data) =>
       try
         result = parser.load data
@@ -21,6 +23,8 @@ class ParseYaml extends noflo.Component
         @outPorts.out.send {}
         return
       @outPorts.out.send result
+    @inPorts.in.on 'endgroup', =>
+      @outPorts.out.endGroup()
     @inPorts.in.on "disconnect", =>
       @outPorts.out.disconnect()
 
