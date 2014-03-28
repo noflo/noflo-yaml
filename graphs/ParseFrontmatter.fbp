@@ -1,5 +1,5 @@
-EXPORT=CONTENT.IN:CONTENT
-EXPORT=RESULTS.OUT:RESULTS
+INPORT=Content.IN:CONTENT
+OUTPORT=Results.OUT:RESULTS
 
 Content(Split) OUT -> IN FileName(ReadGroup)
 'path' -> PROPERTY SetFileName(SetPropertyValue)
