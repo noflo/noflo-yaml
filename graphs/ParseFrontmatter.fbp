@@ -1,9 +1,11 @@
 INPORT=Content.IN:CONTENT
 OUTPORT=Results.OUT:RESULTS
+OUTPORT=FileName.GROUP:FILENAME
 
 Content(Split) OUT -> IN FileName(ReadGroup)
 'path' -> PROPERTY SetFileName(SetPropertyValue)
 FileName() GROUP -> VALUE SetFileName()
+FileName OUT -> IN DropData(core/Drop)
 
 Content() OUT -> IN Clean(RemoveGroups)
 Clean() OUT -> IN Extract(yaml/ExtractFrontmatter) OUT -> IN SplitProps(Split)
