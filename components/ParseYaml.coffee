@@ -3,11 +3,16 @@ parser = require 'js-yaml'
 
 class ParseYaml extends noflo.Component
   constructor: ->
-    @inPorts =
-      in: new noflo.Port 'string'
-    @outPorts =
-      out: new noflo.Port 'object'
-      error: new noflo.Port 'object'
+    @inPorts = new noflo.InPorts
+      in:
+        datatype: 'string'
+        description: 'YAML source'
+    @outPorts = new noflo.OutPorts
+      out:
+        datatype: 'object'
+      error:
+        datatype: 'object'
+        required: false
 
     @inPorts.in.on 'begingroup', (group) =>
       @outPorts.out.beginGroup group
@@ -15,9 +20,8 @@ class ParseYaml extends noflo.Component
       try
         result = parser.load data
       catch e
-        if @outPorts.error.isAttached()
-          @outPorts.error.send e
-          @outPorts.error.disconnect()
+        @outPorts.error.send e
+        @outPorts.error.disconnect()
         return
       if result is null
         @outPorts.out.send {}

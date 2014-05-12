@@ -2,14 +2,20 @@ noflo = require 'noflo'
 
 class ExtractFrontmatter extends noflo.Component
   constructor: ->
-    @inPorts =
-      in: new noflo.Port()
-    @outPorts =
-      out: new noflo.Port()
+    @inPorts = new noflo.InPorts
+      in:
+        datatype: 'string'
+        description: 'Front matter source'
+    @outPorts = new noflo.OutPorts
+      out:
+        datatype: 'object'
 
+    @inPorts.in.on 'begingroup', (group) =>
+      @outPorts.out.beginGroup group
     @inPorts.in.on 'data', (data) =>
       @extract data
-
+    @inPorts.in.on 'endgroup', =>
+      @outPorts.out.endGroup()
     @inPorts.in.on 'disconnect', =>
       @outPorts.out.disconnect()
 

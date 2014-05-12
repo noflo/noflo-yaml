@@ -3,10 +3,13 @@ parser = require 'json2yaml'
 
 class ToYaml extends noflo.Component
   constructor: ->
-    @inPorts =
-      in: new noflo.Port 'object'
-    @outPorts =
-      out: new noflo.Port 'string'
+    @inPorts = new noflo.InPorts
+      in:
+        datatype: 'object'
+        description: 'Object to YAMLify'
+    @outPorts = new noflo.OutPorts
+      out:
+        datatype: 'string'
 
     @inPorts.in.on 'begingroup', (group) =>
       @outPorts.out.beginGroup group
