@@ -2,14 +2,16 @@
   "name": "noflo-yaml",
   "description": "YAML handling components for the NoFlo flow-based programming environment",
   "author": "Henri Bergius <henri.bergius@iki.fi>",
-  "version": "0.0.6",
-  "licenses": [{
-    "type": "MIT",
-    "url": "https://github.com/bergie/noflo/raw/master/LICENSE"
-  }],
+  "version": "0.0.7",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/bergie/noflo/raw/master/LICENSE"
+    }
+  ],
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/noflo/noflo-yaml.git"
+    "type": "git",
+    "url": "https://github.com/noflo/noflo-yaml.git"
   },
   "engines": {
     "node": ">=0.6.0"
@@ -17,12 +19,15 @@
   "dependencies": {
     "noflo": "0.5.x",
     "js-yaml": "0.3.x",
-    "json2yaml": "1.x.x"
+    "json2yaml": "1.x.x",
+    "noflo-objects": "^0.1.10",
+    "noflo-core": "^0.1.9",
+    "noflo-groups": "^0.1.5"
   },
   "devDependencies": {
     "nodeunit": ">=0.6.0",
     "coffeelint": "*",
-    "coffee-script": "1.4.x"
+    "coffee-script": "1.7.x"
   },
   "noflo": {
     "graphs": {

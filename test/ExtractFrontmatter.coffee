@@ -85,3 +85,16 @@ exports['test reading Markdown with subheadlines file'] = (test) ->
 
   fixture = fs.readFileSync "#{__dirname}/fixtures/complex3.markdown", 'utf-8'
   ins.send fixture
+exports['test reading Markdown with inline HTML file'] = (test) ->
+  test.expect 5
+  [c, ins, out] = setupComponent()
+  out.once 'data', (data) ->
+    test.ok data
+    test.ok data.head
+    test.notEqual data.head.indexOf('layout: post'), -1
+    test.notEqual data.head.indexOf('Full-Stack'), -1
+    test.ok data.body
+    test.done()
+
+  fixture = fs.readFileSync "#{__dirname}/fixtures/complex4.markdown", 'utf-8'
+  ins.send fixture

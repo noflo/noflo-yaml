@@ -2,7 +2,7 @@ INPORT=Content.IN:CONTENT
 OUTPORT=Results.OUT:RESULTS
 OUTPORT=FileName.GROUP:FILENAME
 
-Content(Split) OUT -> IN FileName(ReadGroup)
+Content(Split) OUT -> IN LastGroup(groups/LastGroup) OUT -> IN FileName(ReadGroup)
 'path' -> PROPERTY SetFileName(SetPropertyValue)
 FileName() GROUP -> VALUE SetFileName()
 FileName OUT -> IN DropData(core/Drop)
