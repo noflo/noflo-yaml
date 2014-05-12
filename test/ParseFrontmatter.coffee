@@ -19,11 +19,12 @@ setupComponent = (cb) ->
       cb [instance, ins, out, filename]
 
 exports['test parsing a Front Matter file'] = (test) ->
-  test.expect 2
+  test.expect 3
   setupComponent ([c, ins, out]) ->
     out.once 'data', (data) ->
       test.ok data
       test.equal data.path, filePath
+      test.ok data.body
       test.done()
 
     filePath = "#{__dirname}/fixtures/complex4.markdown"

@@ -4,23 +4,22 @@ OUTPORT=FileName.GROUP:FILENAME
 
 Content(Split) OUT -> IN LastGroup(groups/LastGroup) OUT -> IN FileName(ReadGroup)
 'path' -> PROPERTY SetFileName(SetPropertyValue)
-FileName() GROUP -> VALUE SetFileName()
+FileName GROUP -> VALUE SetFileName
 FileName OUT -> IN DropData(core/Drop)
 
-Content() OUT -> IN Clean(RemoveGroups)
-Clean() OUT -> IN Extract(yaml/ExtractFrontmatter) OUT -> IN SplitProps(Split)
-
-'head' -> KEY GetYaml(GetObjectKey)
-SplitProps() OUT -> IN GetYaml()
-GetYaml() OUT -> IN ParseYaml(yaml/ParseYaml)
+Content OUT -> IN Clean(RemoveGroups)
+Clean OUT -> IN Extract(yaml/ExtractFrontmatter)
 
 'body' -> KEY GetBody(GetObjectKey)
 'body' -> PROPERTY Results(SetPropertyValue)
-SplitProps() OUT -> IN GetBody() OUT -> IN MergeBody(Merge)
+Extract OUT -> IN GetBody OUT -> VALUE Results
+
+'head' -> KEY GetYaml(GetObjectKey)
+Extract OUT -> IN GetYaml
+GetYaml OUT -> IN ParseYaml(yaml/ParseYaml)
 
 # Handle files with empty body
-'' -> DATA EmptyBody(Kick)
-GetBody() MISSED -> IN EmptyBody() OUT -> IN MergeBody()
+'' -> STRING EmptyBody(strings/SendString)
+GetBody MISSED -> IN EmptyBody OUT -> VALUE RESULTS
 
-MergeBody() OUT -> VALUE Results()
-ParseYaml() OUT -> IN SetFileName() OUT -> IN Results()
+ParseYaml OUT -> IN SetFileName OUT -> IN Results
