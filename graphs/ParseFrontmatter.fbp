@@ -20,6 +20,6 @@ GetYaml OUT -> IN ParseYaml(yaml/ParseYaml)
 
 # Handle files with empty body
 '' -> STRING EmptyBody(strings/SendString)
-GetBody MISSED -> IN EmptyBody OUT -> VALUE RESULTS
+GetBody MISSED -> IN EmptyBody OUT -> VALUE Results
 
 ParseYaml OUT -> IN SetFileName OUT -> IN Results
