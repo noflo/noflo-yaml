@@ -2,7 +2,7 @@
   "name": "noflo-yaml",
   "description": "YAML handling components for the NoFlo flow-based programming environment",
   "author": "Henri Bergius <henri.bergius@iki.fi>",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "licenses": [
     {
       "type": "MIT",
@@ -17,7 +17,7 @@
     "node": ">=0.6.0"
   },
   "dependencies": {
-    "noflo": "0.5.x",
+    "noflo": "~0.5.4",
     "json2yaml": "1.x.x",
     "noflo-objects": "^0.1.10",
     "noflo-core": "^0.1.9",

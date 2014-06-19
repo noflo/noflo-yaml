@@ -1,23 +1,20 @@
 noflo = require 'noflo'
 parser = require 'json2yaml'
 
-class ToYaml extends noflo.Component
-  constructor: ->
-    @inPorts = new noflo.InPorts
-      in:
-        datatype: 'object'
-        description: 'Object to YAMLify'
-    @outPorts = new noflo.OutPorts
-      out:
-        datatype: 'string'
+exports.getComponent = ->
+  c = new noflo.Component
+  c.description = 'Convert an object to YAML'
+  c.inPorts.add 'in',
+    datatype: 'object'
+    description: 'Object to YAMLify'
+  c.outPorts.add 'out',
+    datatype: 'string'
 
-    @inPorts.in.on 'begingroup', (group) =>
-      @outPorts.out.beginGroup group
-    @inPorts.in.on "data", (data) =>
-      @outPorts.out.send parser.stringify data
-    @inPorts.in.on 'endgroup', =>
-      @outPorts.out.endGroup()
-    @inPorts.in.on "disconnect", =>
-      @outPorts.out.disconnect()
+  noflo.helpers.WirePattern c,
+    in: ['in']
+    out: 'out'
+    forwardGroups: true
+  , (data, groups, out) ->
+    out.send parser.stringify data
 
-exports.getComponent = -> new ToYaml
+  c

@@ -1,35 +1,28 @@
 noflo = require 'noflo'
 parser = require 'js-yaml'
 
-class ParseYaml extends noflo.Component
-  constructor: ->
-    @inPorts = new noflo.InPorts
-      in:
-        datatype: 'string'
-        description: 'YAML source'
-    @outPorts = new noflo.OutPorts
-      out:
-        datatype: 'object'
-      error:
-        datatype: 'object'
-        required: false
+exports.getComponent = ->
+  c = new noflo.Component
+  c.description = 'Parse YAML to an object'
+  c.inPorts.add 'in',
+    datatype: 'string'
+    description: 'YAML source'
+  c.outPorts.add 'out',
+    datatype: 'object'
+  c.outPorts.add 'error',
+    datatype: 'object'
+    required: false
 
-    @inPorts.in.on 'begingroup', (group) =>
-      @outPorts.out.beginGroup group
-    @inPorts.in.on "data", (data) =>
-      try
-        result = parser.load data
-      catch e
-        @outPorts.error.send e
-        @outPorts.error.disconnect()
-        return
-      if result is null
-        @outPorts.out.send {}
-        return
-      @outPorts.out.send result
-    @inPorts.in.on 'endgroup', =>
-      @outPorts.out.endGroup()
-    @inPorts.in.on "disconnect", =>
-      @outPorts.out.disconnect()
-
-exports.getComponent = -> new ParseYaml
+  noflo.helpers.WirePattern c,
+    in: ['in']
+    out: 'out'
+    forwardGroups: true
+  , (data, groups, out) ->
+    try
+      result = parser.load data
+    catch e
+      c.error e
+      return
+    result = {} if result is null
+    out.send result
+  c
