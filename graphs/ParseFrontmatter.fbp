@@ -7,14 +7,15 @@ Content(Split) OUT -> IN LastGroup(groups/LastGroup) OUT -> IN FileName(ReadGrou
 FileName GROUP -> VALUE SetFileName
 FileName OUT -> IN DropData(core/Drop)
 
-Content OUT -> IN Clean(RemoveGroups)
-Clean OUT -> IN Extract(yaml/ExtractFrontmatter)
+Content OUT -> IN Extract(yaml/ExtractFrontmatter)
 
 'body' -> KEY GetBody(GetObjectKey)
+'false' -> SENDGROUP GetBody
 'body' -> PROPERTY Results(SetPropertyValue)
 Extract OUT -> IN GetBody OUT -> VALUE Results
 
 'head' -> KEY GetYaml(GetObjectKey)
+'false' -> SENDGROUP GetYaml
 Extract OUT -> IN GetYaml
 GetYaml OUT -> IN ParseYaml(yaml/ParseYaml)
 
