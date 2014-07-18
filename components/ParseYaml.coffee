@@ -18,6 +18,9 @@ exports.getComponent = ->
     out: 'out'
     forwardGroups: true
   , (data, groups, out) ->
+    unless data
+      out.send {}
+      return
     try
       result = parser.load data
     catch e
