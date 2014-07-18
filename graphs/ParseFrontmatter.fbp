@@ -9,13 +9,13 @@ FileName OUT -> IN DropData(core/Drop)
 
 Content OUT -> IN Extract(yaml/ExtractFrontmatter)
 
-'body' -> KEY GetBody(GetObjectKey)
-'false' -> SENDGROUP GetBody
+'false' -> SENDGROUP GetBody(GetObjectKey)
+'body' -> KEY GetBody
 'body' -> PROPERTY Results(SetPropertyValue)
 Extract OUT -> IN GetBody OUT -> VALUE Results
 
-'head' -> KEY GetYaml(GetObjectKey)
-'false' -> SENDGROUP GetYaml
+'false' -> SENDGROUP GetYaml(GetObjectKey)
+'head' -> KEY GetYaml
 Extract OUT -> IN GetYaml
 GetYaml OUT -> IN ParseYaml(yaml/ParseYaml)
 

@@ -19,8 +19,11 @@ setupComponent = (cb) ->
       cb [instance, ins, out, filename]
 
 exports['test parsing a Front Matter file'] = (test) ->
-  test.expect 3
+  test.expect 5
   setupComponent ([c, ins, out]) ->
+    groups = ['foo']
+    out.on 'begingroup', (group) ->
+      test.equal group, groups.shift()
     out.once 'data', (data) ->
       test.ok data
       test.equal data.path, filePath
@@ -28,6 +31,7 @@ exports['test parsing a Front Matter file'] = (test) ->
       test.done()
 
     filePath = "#{__dirname}/fixtures/complex4.markdown"
+    groups.push filePath
     fixture = fs.readFileSync filePath, 'utf-8'
     ins.beginGroup 'foo'
     ins.beginGroup filePath
