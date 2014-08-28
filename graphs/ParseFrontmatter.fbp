@@ -1,6 +1,7 @@
 INPORT=Content.IN:CONTENT
 OUTPORT=Results.OUT:RESULTS
 OUTPORT=FileName.GROUP:FILENAME
+OUTPORT=Errors.OUT:ERROR
 
 Content(Split) OUT -> IN LastGroup(groups/LastGroup) OUT -> IN FileName(ReadGroup)
 'path' -> PROPERTY SetFileName(SetPropertyValue)
@@ -24,3 +25,4 @@ GetYaml OUT -> IN ParseYaml(yaml/ParseYaml)
 GetBody MISSED -> IN EmptyBody OUT -> VALUE Results
 
 ParseYaml OUT -> IN SetFileName OUT -> IN Results
+ParseYaml ERROR -> IN Errors(core/Merge)
