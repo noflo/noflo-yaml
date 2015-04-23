@@ -1,5 +1,5 @@
 noflo = require 'noflo'
-parser = require 'json2yaml'
+parser = require 'js-yaml'
 
 exports.getComponent = ->
   c = new noflo.Component
@@ -15,6 +15,6 @@ exports.getComponent = ->
     out: 'out'
     forwardGroups: true
   , (data, groups, out) ->
-    out.send parser.stringify data
+    out.send '---\n' + parser.safeDump data
 
   c

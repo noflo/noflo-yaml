@@ -18,11 +18,10 @@
   },
   "dependencies": {
     "noflo": "~0.5.4",
-    "json2yaml": "1.x.x",
     "noflo-objects": "^0.1.12",
     "noflo-core": "^0.1.9",
     "noflo-groups": "^0.1.5",
-    "js-yaml": "^3.1.0",
+    "js-yaml": "^3.2.0",
     "noflo-strings": "^0.1.9"
   },
   "devDependencies": {

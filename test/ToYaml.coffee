@@ -15,9 +15,29 @@ exports['test producing simple YAML array'] = (test) ->
   out.once 'data', (data) ->
     test.equals data, '''
     ---
-      - "one"
-      - "two"
-      - "three"
+    - one
+    - two
+    - three
     ''' + "\n"
     test.done()
   ins.send ['one', 'two', 'three']
+exports['test producing YAML with problematic characters'] = (test) ->
+  test.expect 1
+  [c, ins, out] = setupComponent()
+  out.once 'data', (data) ->
+    test.equals data, '''
+    ---
+    title: The Grid - an unconventional startup
+    author:
+      - name: Brian Axe
+        url: "https://medium.com/@brianaxe"
+        avatar: {}
+    ''' + "\n"
+    test.done()
+  ins.send
+    title: "The Grid - an unconventional startup"
+    author: [
+      name: "Brian Axe"
+      url: "https://medium.com/@brianaxe"
+      avatar: {}
+    ]
