@@ -5,7 +5,7 @@ noflo = require 'noflo'
 setupComponent = (cb) ->
   baseDir = path.resolve __dirname, '../'
   loader = new noflo.ComponentLoader baseDir
-  loader.load 'yaml/ParseFrontmatter', (instance) ->
+  loader.load 'yaml/ParseFrontmatter', (err, instance) ->
     instance.once 'ready', ->
       ins = noflo.internalSocket.createSocket()
       out = noflo.internalSocket.createSocket()
