@@ -17,17 +17,17 @@
     "node": ">=0.6.0"
   },
   "dependencies": {
-    "noflo": "~0.5.4",
-    "noflo-objects": "^0.1.12",
-    "noflo-core": "^0.1.9",
-    "noflo-groups": "^0.1.5",
-    "js-yaml": "^3.2.0",
-    "noflo-strings": "^0.1.9"
+    "noflo": "0.5.13",
+    "noflo-objects": "0.1.12",
+    "noflo-core": "0.1.14",
+    "noflo-groups": "0.1.7",
+    "js-yaml": "3.4.2",
+    "noflo-strings": "0.1.11"
   },
   "devDependencies": {
-    "nodeunit": ">=0.6.0",
-    "coffeelint": "*",
-    "coffee-script": "1.8.x"
+    "nodeunit": "0.9.1",
+    "coffeelint": "1.12.1",
+    "coffee-script": "1.8.0"
   },
   "noflo": {
     "graphs": {
