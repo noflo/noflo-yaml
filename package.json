@@ -17,7 +17,7 @@
     "node": ">=0.6.0"
   },
   "dependencies": {
-    "noflo": "~0.5.4",
+    "noflo": "~0.5.16",
     "noflo-objects": "^0.1.12",
     "noflo-core": "^0.1.9",
     "noflo-groups": "^0.1.5",
