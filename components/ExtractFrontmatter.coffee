@@ -9,25 +9,23 @@ exports.getComponent = ->
   c.outPorts.add 'out',
     datatype: 'object'
 
-  noflo.helpers.WirePattern c,
-    in: ['in']
-    out: 'out'
-    forwardGroups: true
-  , (data, groups, out) ->
+  c.process (input, output) ->
+    data = input.get 'in'
+    return unless data.type is 'data'
     matcher = ///
       [\n]*-{3}        # Front Matter block starts
       ([\w\W]*)        # YAML contents
       [\n]-{3}[\n]        # Front Matter block ends
       ([\w\W]*)*       # Body
       ///
-    match = matcher.exec data
+    match = matcher.exec data.data
     unless match
-      out.send
-        head: ''
-        body: data
+      output.sendDone
+        out:
+          head: ''
+          body: data.data
       return
-    out.send
-      head: match[1]
-      body: match[2]
-
-  c
+    output.sendDone
+      out:
+        head: match[1]
+        body: match[2]
