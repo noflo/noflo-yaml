@@ -17,6 +17,10 @@ describe 'ParseFrontmatter component', ->
       c = instance
       c.once 'ready', ->
         c.start()
+        c.network.on 'process-error', (e) ->
+          setTimeout ->
+            throw e.error
+          , 0
         done()
   beforeEach ->
     ins = noflo.internalSocket.createSocket()
