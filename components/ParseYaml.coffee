@@ -13,19 +13,31 @@ exports.getComponent = ->
     datatype: 'object'
     required: false
 
-  noflo.helpers.WirePattern c,
-    in: ['in']
-    out: 'out'
-    forwardGroups: true
-  , (data, groups, out) ->
-    unless data
-      out.send {}
+  brackets = []
+  c.process (input, output) ->
+    sendResult = (port, result) ->
+      output.sendIP port, new noflo.IP 'openBracket', bracket for bracket in brackets
+      output.sendIP port, result
+      output.sendIP port, new noflo.IP 'closeBracket', bracket for bracket in brackets
+      output.done()
       return
+
+    data = input.get 'in'
+    if data.type is 'openBracket'
+      brackets.push data.data
+      return
+    if data.type is 'closeBracket'
+      brackets.pop()
+      return
+    return unless data.type is 'data'
+
+    return sendResult 'out', {} unless data.data
+
     try
-      result = parser.load data
+      result = parser.load data.data
     catch e
-      c.error e
-      return
+      return sendResult 'error', e
+
     result = {} if result is null
-    out.send result
-  c
+
+    return sendResult 'out', result

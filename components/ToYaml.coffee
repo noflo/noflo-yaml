@@ -10,11 +10,9 @@ exports.getComponent = ->
   c.outPorts.add 'out',
     datatype: 'string'
 
-  noflo.helpers.WirePattern c,
-    in: ['in']
-    out: 'out'
-    forwardGroups: true
-  , (data, groups, out) ->
-    out.send '---\n' + parser.safeDump data
-
-  c
+  c.process (input, output) ->
+    data = input.get 'in'
+    return unless data.type is 'data'
+    yaml = '---\n' + parser.safeDump data.data
+    output.sendDone
+      out: yaml
