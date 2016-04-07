@@ -3,7 +3,9 @@
   "description": "YAML handling components for the NoFlo flow-based programming environment",
   "author": "Henri Bergius <henri.bergius@iki.fi>",
   "version": "0.1.0",
-  "keywords": ["noflo"],
+  "keywords": [
+    "noflo"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -13,7 +15,7 @@
     "node": ">=0.6.0"
   },
   "dependencies": {
-    "noflo": "~0.7.2",
+    "noflo": "~0.7.3",
     "noflo-objects": "^0.1.12",
     "noflo-core": "^0.1.9",
     "noflo-groups": "^0.1.5",
