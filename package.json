@@ -19,15 +19,15 @@
     "noflo-objects": "^0.1.12",
     "noflo-core": "^0.1.9",
     "noflo-groups": "^0.1.5",
-    "js-yaml": "^3.5.5",
+    "js-yaml": "^3.6.0",
     "noflo-strings": "^0.1.9"
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "coffee-script": "1.10.0",
-    "coffeelint": "1.15.0",
+    "coffee-script": "^1.10.0",
+    "coffeelint": "^1.15.7",
     "grunt": "^0.4.5",
-    "grunt-coffeelint": "0.0.15",
+    "grunt-coffeelint": "^0.0.15",
     "grunt-mocha-test": "^0.12.7",
     "mocha": "^2.4.5"
   },
