@@ -59,6 +59,7 @@ describe 'ParseFrontmatter component', ->
       ins.send fixture
       ins.endGroup()
       ins.endGroup()
+      ins.disconnect()
 
   describe 'Parsing a file with pipe chars', ->
     it 'should return an error with correct groups', (done) ->
@@ -80,3 +81,4 @@ describe 'ParseFrontmatter component', ->
       ins.send fixture
       ins.endGroup()
       ins.endGroup()
+      ins.disconnect()
