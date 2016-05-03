@@ -11,12 +11,17 @@ describe 'ParseFrontmatter component', ->
   out = null
   error = null
   before (done) ->
+    @timeout 4000
     loader = new noflo.ComponentLoader baseDir
     loader.load 'yaml/ParseFrontmatter', (err, instance) ->
       return done err if err
       c = instance
       c.once 'ready', ->
         c.start()
+        c.network.on 'process-error', (e) ->
+          setTimeout ->
+            throw e.error
+          , 0
         done()
   beforeEach ->
     ins = noflo.internalSocket.createSocket()
@@ -55,6 +60,7 @@ describe 'ParseFrontmatter component', ->
       ins.send fixture
       ins.endGroup()
       ins.endGroup()
+      ins.disconnect()
 
   describe 'Parsing a file with pipe chars', ->
     it 'should return an error with correct groups', (done) ->
@@ -76,3 +82,4 @@ describe 'ParseFrontmatter component', ->
       ins.send fixture
       ins.endGroup()
       ins.endGroup()
+      ins.disconnect()

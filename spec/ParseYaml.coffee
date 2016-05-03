@@ -37,6 +37,7 @@ describe 'ParseYaml component', ->
 - two
 - three
       """
+      ins.disconnect()
 
   describe 'reading an empty string', ->
     it 'should return an empty object', (done) ->
@@ -44,3 +45,4 @@ describe 'ParseYaml component', ->
         chai.expect(data).to.eql {}
         done()
       ins.send ''
+      ins.disconnect()

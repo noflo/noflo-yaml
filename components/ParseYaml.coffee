@@ -13,19 +13,24 @@ exports.getComponent = ->
     datatype: 'object'
     required: false
 
-  noflo.helpers.WirePattern c,
-    in: ['in']
-    out: 'out'
-    forwardGroups: true
-  , (data, groups, out) ->
-    unless data
-      out.send {}
+  brackets = []
+  c.process (input, output) ->
+    data = input.get 'in'
+    return unless data.type is 'data'
+
+    unless data.data
+      output.sendDone
+        out: {}
       return
+
     try
-      result = parser.load data
+      result = parser.load data.data
     catch e
-      c.error e
+      output.sendDone
+        error: e
       return
+
     result = {} if result is null
-    out.send result
-  c
+
+    output.sendDone
+      out: result

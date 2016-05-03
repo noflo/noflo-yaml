@@ -12,9 +12,10 @@ exports.getComponent = ->
   c.outPorts.add 'out',
     datatype: 'string'
 
-  noflo.helpers.WirePattern c,
-    in: ['head', 'body']
-    out: 'out'
-    forwardGroups: true
-  , (data, groups, out) ->
-    out.send "#{data.head}\n---\n#{data.body}"
+  c.process (input, output) ->
+    return unless input.has 'head', 'body'
+    [head, body] = input.get 'head', 'body'
+    return unless head.type is 'data'
+    return unless body.type is 'data'
+    output.sendDone
+      out: "#{head.data}\n---\n#{body.data}"
