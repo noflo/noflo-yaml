@@ -20,7 +20,7 @@
     "noflo-core": "^0.3.0",
     "noflo-groups": "^0.1.5",
     "noflo-strings": "^0.1.12",
-    "js-yaml": "^3.6.0"
+    "js-yaml": "^3.6.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
