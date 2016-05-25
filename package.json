@@ -17,10 +17,10 @@
   "dependencies": {
     "noflo": "~0.7.5",
     "noflo-objects": "^0.1.13",
-    "noflo-core": "^0.1.9",
+    "noflo-core": "^0.2.0",
     "noflo-groups": "^0.1.5",
-    "js-yaml": "^3.6.0",
-    "noflo-strings": "^0.1.12"
+    "noflo-strings": "^0.1.12",
+    "js-yaml": "^3.6.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
