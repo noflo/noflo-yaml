@@ -11,7 +11,7 @@ describe 'ParseFrontmatter component', ->
   out = null
   error = null
   before (done) ->
-    @timeout 6000
+    @timeout 10000
     loader = new noflo.ComponentLoader baseDir
     loader.load 'yaml/ParseFrontmatter', (err, instance) ->
       return done err if err
