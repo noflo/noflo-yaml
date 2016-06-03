@@ -18,7 +18,7 @@
     "noflo": "~0.7.6",
     "noflo-objects": "^0.1.13",
     "noflo-core": "^0.3.0",
-    "noflo-groups": "^0.1.8",
+    "noflo-groups": "^0.1.9",
     "noflo-strings": "^0.1.12",
     "js-yaml": "^3.6.1"
   },
