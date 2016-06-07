@@ -15,11 +15,11 @@
     "node": ">=0.6.0"
   },
   "dependencies": {
-    "noflo": "~0.7.6",
-    "noflo-objects": "^0.1.13",
+    "noflo": "0.x >= 0.7",
+    "noflo-objects": "^0.1.14",
     "noflo-core": "^0.3.0",
-    "noflo-groups": "^0.1.8",
-    "noflo-strings": "^0.1.12",
+    "noflo-groups": "^0.1.10",
+    "noflo-strings": "^0.1.14"
     "js-yaml": "^3.6.1"
   },
   "devDependencies": {
