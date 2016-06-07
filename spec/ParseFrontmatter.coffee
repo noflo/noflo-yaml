@@ -22,18 +22,17 @@ describe 'ParseFrontmatter component', ->
           setTimeout ->
             throw e.error
           , 0
+        ins = noflo.internalSocket.createSocket()
+        c.inPorts.content.attach ins
         done()
   beforeEach ->
-    ins = noflo.internalSocket.createSocket()
     out = noflo.internalSocket.createSocket()
     filename = noflo.internalSocket.createSocket()
     error = noflo.internalSocket.createSocket()
-    c.inPorts.content.attach ins
     c.outPorts.results.attach out
     c.outPorts.filename.attach filename
     c.outPorts.error.attach error
   afterEach ->
-    c.inPorts.content.detach ins
     c.outPorts.results.detach out
     c.outPorts.filename.detach filename
     c.outPorts.error.detach error
