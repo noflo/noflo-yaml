@@ -12,10 +12,15 @@ exports.getComponent = ->
   c.outPorts.add 'out',
     datatype: 'string'
 
+  c.forwardBrackets =
+    body: ['out']
+
   c.process (input, output) ->
     return unless input.has 'head', 'body'
-    [head, body] = input.get 'head', 'body'
-    return unless head.type is 'data'
+    head = input.get 'head'
+    until head.type is 'data'
+      head = input.get 'head'
+    body = input.get 'body'
     return unless body.type is 'data'
     output.sendDone
       out: "#{head.data}\n---\n#{body.data}"
