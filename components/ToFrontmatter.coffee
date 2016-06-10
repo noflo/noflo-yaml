@@ -16,7 +16,7 @@ exports.getComponent = ->
     body: ['out']
 
   c.process (input, output) ->
-    return unless input.has 'head', 'body'
+    return unless input.has 'head', 'body', (ip) -> ip.type is 'data'
     head = input.get 'head'
     until head.type is 'data'
       head = input.get 'head'
