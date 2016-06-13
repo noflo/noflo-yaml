@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "noflo": "0.x >= 0.5",
-    "noflo-objects": "^0.1.14",
+    "noflo-objects": "^0.2.0",
     "noflo-core": "^0.2.2",
     "noflo-groups": "^0.1.10",
     "js-yaml": "^3.5.5",
