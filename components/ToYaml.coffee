@@ -11,8 +11,8 @@ exports.getComponent = ->
     datatype: 'string'
 
   c.process (input, output) ->
-    data = input.get 'in'
-    return unless data.type is 'data'
-    yaml = '---\n' + parser.safeDump data.data
+    return unless input.hasData 'in'
+    data = input.getData 'in'
+    yaml = '---\n' + parser.safeDump data
     output.sendDone
       out: yaml
