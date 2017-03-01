@@ -17,14 +17,13 @@ describe 'ParseFrontmatter component', ->
       return done err if err
       c = instance
       c.once 'ready', ->
-        c.start()
         c.network.on 'process-error', (e) ->
           setTimeout ->
             throw e.error
           , 0
         ins = noflo.internalSocket.createSocket()
         c.inPorts.content.attach ins
-        done()
+        c.start done
   beforeEach ->
     out = noflo.internalSocket.createSocket()
     filename = noflo.internalSocket.createSocket()
