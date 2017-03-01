@@ -15,19 +15,18 @@ exports.getComponent = ->
 
   brackets = []
   c.process (input, output) ->
-    data = input.get 'in'
-    return unless data.type is 'data'
+    return unless input.hasData 'in'
+    data = input.getData 'in'
 
-    unless data.data
+    unless data
       output.sendDone
         out: {}
       return
 
     try
-      result = parser.load data.data
+      result = parser.load data
     catch e
-      output.sendDone
-        error: e
+      output.sendDone e
       return
 
     result = {} if result is null
