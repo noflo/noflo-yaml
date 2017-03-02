@@ -19,7 +19,7 @@
     "noflo-objects": "^0.3.0",
     "noflo-core": "^0.3.0",
     "noflo-groups": "^0.1.10",
-    "noflo-strings": "^0.2.0",
+    "noflo-strings": "^0.3.0",
     "js-yaml": "^3.6.1"
   },
   "devDependencies": {
