@@ -3,20 +3,24 @@ OUTPORT=Results.OUT:RESULTS
 OUTPORT=FileName.GROUP:FILENAME
 OUTPORT=Errors.OUT:ERROR
 
-Content(Split) OUT -> IN LastGroup(groups/LastGroup) OUT -> IN FileName(ReadGroup)
-'path' -> PROPERTY SetFileName(SetPropertyValue)
+Content(core/Split) OUT -> IN LastGroup(groups/LastGroup) OUT -> IN FileName(groups/ReadGroup)
+'path' -> PROPERTY SetFileName(objects/SetPropertyValue)
 FileName GROUP -> VALUE SetFileName
 FileName OUT -> IN DropData(core/Drop)
 
 Content OUT -> IN Extract(yaml/ExtractFrontmatter)
 
-'false' -> SENDGROUP GetBody(GetObjectKey)
-'body' -> KEY GetBody
-'body' -> PROPERTY Results(SetPropertyValue)
+'false' -> SENDGROUP GetBody(objects/GetObjectKey)
+'body' -> STRING SendBody(strings/SendString)
+SendBody OUT -> KEY GetBody
+SendBody OUT -> PROPERTY Results(objects/SetPropertyValue)
+Content OUT -> IN SendBody
 Extract OUT -> IN GetBody OUT -> VALUE Results
 
-'false' -> SENDGROUP GetYaml(GetObjectKey)
-'head' -> KEY GetYaml
+'false' -> SENDGROUP GetYaml(objects/GetObjectKey)
+'head' -> STRING SendHead(strings/SendString)
+SendHead OUT -> KEY GetYaml
+Content OUT -> IN SendHead
 Extract OUT -> IN GetYaml
 GetYaml OUT -> IN ParseYaml(yaml/ParseYaml)
 

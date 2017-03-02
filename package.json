@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "noflo": "0.x >= 0.8",
-    "noflo-objects": "^0.2.0",
+    "noflo-objects": "^0.3.0",
     "noflo-core": "^0.3.0",
     "noflo-groups": "^0.1.10",
     "noflo-strings": "^0.2.0",
