@@ -4,9 +4,9 @@ OUTPORT=FileName.GROUP:FILENAME
 OUTPORT=Errors.OUT:ERROR
 
 Content(core/Split) OUT -> IN LastGroup(groups/LastGroup) OUT -> IN FileName(groups/ReadGroup)
-'path' -> PROPERTY SetFileName(objects/SetPropertyValue)
+'path' -> STRING SendPath(strings/SendString) OUT -> PROPERTY SetFileName(objects/SetPropertyValue)
 FileName GROUP -> VALUE SetFileName
-FileName OUT -> IN DropData(core/Drop)
+FileName GROUP -> IN SendPath
 
 Content OUT -> IN Extract(yaml/ExtractFrontmatter)
 
