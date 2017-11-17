@@ -3,6 +3,8 @@ OUTPORT=Results.OUT:RESULTS
 OUTPORT=FileName.GROUP:FILENAME
 OUTPORT=Errors.OUT:ERROR
 
+# @description Parse document with Front Matter metadata and send out as object with head and body
+
 Content(core/Split) OUT -> IN LastGroup(groups/LastGroup) OUT -> IN FileName(groups/ReadGroup)
 'path' -> STRING SendPath(strings/SendString) OUT -> PROPERTY SetFileName(objects/SetPropertyValue)
 FileName GROUP -> VALUE SetFileName
