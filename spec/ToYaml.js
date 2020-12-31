@@ -54,9 +54,9 @@ describe('ToYaml component', () => {
 ---
 title: The Grid - an unconventional startup
 author:
-- name: Brian Axe
-  url: 'https://medium.com/@brianaxe'
-  avatar: {}\
+  - name: Brian Axe
+    url: 'https://medium.com/@brianaxe'
+    avatar: {}\
 
 `);
       done();
