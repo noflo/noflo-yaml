@@ -14,7 +14,7 @@ exports.getComponent = function () {
   return c.process((input, output) => {
     if (!input.hasData('in')) { return; }
     const data = input.getData('in');
-    const yaml = `---\n${parser.safeDump(data)}`;
+    const yaml = `---\n${parser.dump(data)}`;
     output.sendDone({ out: yaml });
   });
 };
