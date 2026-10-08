@@ -1,4 +1,4 @@
-# noflo-yaml
+# @noflo/yaml
 
 YAML handling components for [NoFlo](https://noflojs.org)
 
