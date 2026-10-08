@@ -1,0 +1,31 @@
+topic: yaml/ToYaml
+cases:
+  - name: producing a simple YAML array
+    assertion: should return the expected string
+    inputs:
+      in: ["one", "two", "three"]
+    expect:
+      out:
+        equals: |
+          ---
+          - one
+          - two
+          - three
+  - name: producing YAML with problematic characters
+    assertion: should return the expected string
+    inputs:
+      in:
+        title: The Grid - an unconventional startup
+        author:
+          - name: Brian Axe
+            url: https://medium.com/@brianaxe
+            avatar: {}
+    expect:
+      out:
+        equals: |
+          ---
+          title: The Grid - an unconventional startup
+          author:
+            - name: Brian Axe
+              url: https://medium.com/@brianaxe
+              avatar: {}

@@ -1,0 +1,23 @@
+topic: yaml/ToFrontmatter
+cases:
+  - name: joining head and body
+    assertion: should produce the Front Matter document
+    inputs:
+      head: "title: Hello"
+      body: "World"
+    expect:
+      out:
+        equals: "title: Hello\n---\nWorld"
+  - name: multiline head and body
+    assertion: should keep the content intact around the separator
+    inputs:
+      head: |
+        title: Hello
+        tags: [a, b]
+      body: |
+        First line
+
+        Second line
+    expect:
+      out:
+        equals: "title: Hello\ntags: [a, b]\n\n---\nFirst line\n\nSecond line\n"

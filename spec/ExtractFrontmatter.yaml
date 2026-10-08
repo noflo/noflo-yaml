@@ -1,0 +1,33 @@
+topic: yaml/ExtractFrontmatter
+cases:
+  - name: reading a Front Matter document
+    assertion: should find head and body
+    inputs:
+      in: |
+        ---
+        foo: bar
+        ---
+        hello
+    expect:
+      out:
+        equals:
+          head: "\nfoo: bar"
+          body: "hello\n"
+  - name: reading empty Front Matter
+    assertion: should find head and body
+    inputs:
+      in: "---\n---\nhello\n"
+    expect:
+      out:
+        equals:
+          head: ""
+          body: "hello\n"
+  - name: reading a regular file without Front Matter
+    assertion: should pass the content through as body
+    inputs:
+      in: "hello\n"
+    expect:
+      out:
+        equals:
+          head: ""
+          body: "hello\n"

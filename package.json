@@ -1,39 +1,52 @@
 {
   "name": "noflo-yaml",
   "description": "YAML handling components for the NoFlo flow-based programming environment",
-  "author": "Henri Bergius <henri.bergius@iki.fi>",
   "version": "0.5.0",
+  "author": {
+    "name": "Henri Bergius",
+    "email": "henri.bergius@iki.fi",
+    "url": "http://bergie.iki.fi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/noflo/noflo-yaml.git"
+  },
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
   "keywords": [
     "noflo"
   ],
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/noflo/noflo-yaml.git"
-  },
-  "engines": {
-    "node": ">=6"
-  },
+  "files": [
+    "components/",
+    "graphs/",
+    "spec/",
+    "test/",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
   "dependencies": {
-    "coffeescript": "^2.5.1",
-    "js-yaml": "^4.0.0",
-    "noflo": "^1.0.0",
-    "noflo-core": ">=0.4.0",
-    "noflo-groups": ">=0.2.0",
-    "noflo-objects": ">=0.3.0",
-    "noflo-strings": ">=0.3.0"
+    "@noflo/noflo": "^2.0.0-alpha.0",
+    "js-yaml": "^5.4.3"
   },
   "devDependencies": {
-    "chai": "^4.0.0",
-    "eslint": "^7.16.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-chai": "0.0.1",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-mocha": "^8.0.0",
-    "mocha": "^8.2.1"
+    "@biomejs/biome": "^2.0.0",
+    "@noflo/fbp-spec-runner": "^2.0.0-alpha.0",
+    "@noflo/loader-node": "^2.0.0-alpha.0",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.0.0"
   },
   "scripts": {
-    "pretest": "eslint .",
-    "test": "mocha -R spec -t 2000 spec/*.js"
+    "lint": "npx @biomejs/biome check --use-editorconfig=true components/ 'spec/**/*.yaml' test/",
+    "format": "npx @biomejs/biome check --use-editorconfig=true --write components/ 'spec/**/*.yaml' test/",
+    "types": "tsc -p tsconfig.json",
+    "test": "npm run types && npm run lint && npm run test:spec && npm run test:node",
+    "test:spec": "node \"$(node -p \"require.resolve('@noflo/fbp-spec-runner/src/cli.js')\")\" spec/",
+    "test:node": "node --test test/*.test.js",
+    "test:bun": "bun test test/*.test.js",
+    "test:deno": "deno test --allow-all --no-check test/*.test.js"
   }
 }

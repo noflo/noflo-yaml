@@ -1,0 +1,45 @@
+topic: yaml/ParseYaml
+cases:
+  - name: parsing a simple YAML array
+    assertion: should return the array
+    inputs:
+      in: |
+        - one
+        - two
+        - three
+    expect:
+      out:
+        equals: ["one", "two", "three"]
+  - name: parsing an object
+    assertion: should return the object
+    inputs:
+      in: |
+        hello: world
+        count: 2
+    expect:
+      out:
+        equals:
+          hello: world
+          count: 2
+  - name: reading an empty string
+    assertion: should return an empty object
+    inputs:
+      in: ""
+    expect:
+      out:
+        equals: {}
+  - name: reading whitespace-only input
+    assertion: should return an empty object
+    inputs:
+      in: "   \n  "
+    expect:
+      out:
+        equals: {}
+  - name: parsing invalid YAML
+    assertion: should send an error to the error port
+    inputs:
+      in: "a: [1, 2"
+    expect:
+      error:
+        path: $.message
+        contains: end of the stream
