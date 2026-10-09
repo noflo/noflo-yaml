@@ -29,11 +29,16 @@
     "LICENSE"
   ],
   "dependencies": {
+    "@noflo/core": "^2.0.0-alpha.1",
+    "@noflo/groups": "^2.0.0-alpha.1",
     "@noflo/noflo": "^2.0.0-alpha.2",
+    "@noflo/objects": "^2.0.0-alpha.1",
+    "@noflo/strings": "^2.0.0-alpha.1",
     "js-yaml": "^5.4.3"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.0.0",
+    "@noflo/fbp": "^2.0.0-alpha.2",
     "@noflo/fbp-spec-runner": "^2.0.0-alpha.2",
     "@noflo/loader-node": "^2.0.0-alpha.2",
     "@types/node": "^24.0.0",

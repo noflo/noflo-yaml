@@ -1,34 +1,34 @@
-INPORT=Content.IN:CONTENT
-OUTPORT=Results.OUT:RESULTS
-OUTPORT=FileName.GROUP:FILENAME
-OUTPORT=Errors.OUT:ERROR
+INPORT=Content.in:content
+OUTPORT=Results.out:results
+OUTPORT=FileName.group:filename
+OUTPORT=Errors.out:error
 
 # @description Parse document with Front Matter metadata and send out as object with head and body
 
-Content(core/Split) OUT -> IN LastGroup(groups/LastGroup) OUT -> IN FileName(groups/ReadGroup)
-'path' -> STRING SendPath(strings/SendString) OUT -> PROPERTY SetFileName(objects/SetPropertyValue)
-FileName GROUP -> VALUE SetFileName
-FileName GROUP -> IN SendPath
+Content(core/Split) out -> in LastGroup(groups/LastGroup) out -> in FileName(groups/ReadGroup)
+'path' -> string SendPath(strings/SendString) out -> property SetFileName(objects/SetPropertyValue)
+FileName group -> value SetFileName
+FileName group -> in SendPath
 
-Content OUT -> IN Extract(yaml/ExtractFrontmatter)
+Content out -> in Extract(yaml/ExtractFrontmatter)
 
-'false' -> SENDGROUP GetBody(objects/GetObjectKey)
-'body' -> STRING SendBody(strings/SendString)
-SendBody OUT -> KEY GetBody
-SendBody OUT -> PROPERTY Results(objects/SetPropertyValue)
-Content OUT -> IN SendBody
-Extract OUT -> IN GetBody OUT -> VALUE Results
+'false' -> sendgroup GetBody(objects/GetObjectKey)
+'body' -> string SendBody(strings/SendString)
+SendBody out -> key GetBody
+SendBody out -> property Results(objects/SetPropertyValue)
+Content out -> in SendBody
+Extract out -> in GetBody out -> value Results
 
-'false' -> SENDGROUP GetYaml(objects/GetObjectKey)
-'head' -> STRING SendHead(strings/SendString)
-SendHead OUT -> KEY GetYaml
-Content OUT -> IN SendHead
-Extract OUT -> IN GetYaml
-GetYaml OUT -> IN ParseYaml(yaml/ParseYaml)
+'false' -> sendgroup GetYaml(objects/GetObjectKey)
+'head' -> string SendHead(strings/SendString)
+SendHead out -> key GetYaml
+Content out -> in SendHead
+Extract out -> in GetYaml
+GetYaml out -> in ParseYaml(yaml/ParseYaml)
 
 # Handle files with empty body
-'' -> STRING EmptyBody(strings/SendString)
-GetBody MISSED -> IN EmptyBody OUT -> VALUE Results
+'' -> string EmptyBody(strings/SendString)
+GetBody missed -> in EmptyBody out -> value Results
 
-ParseYaml OUT -> IN SetFileName OUT -> IN Results
-ParseYaml ERROR -> IN Errors(core/Merge)
+ParseYaml out -> in SetFileName out -> in Results
+ParseYaml error -> in Errors(core/Merge)
