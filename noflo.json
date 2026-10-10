@@ -1,0 +1,255 @@
+{
+  "format": "noflo-manifest",
+  "version": 1,
+  "id": "yaml",
+  "description": "YAML handling components for the NoFlo flow-based programming environment",
+  "icon": null,
+  "npm": "@noflo/yaml",
+  "jsr": null,
+  "source": "git://github.com/noflo/noflo-yaml",
+  "revision": "397c673e25ab71b7e5d43367b817f1c84685f8a8",
+  "loader": false,
+  "namespaces": {
+    "core": {
+      "npm": "@noflo/core"
+    },
+    "groups": {
+      "npm": "@noflo/groups"
+    },
+    "strings": {
+      "npm": "@noflo/strings"
+    },
+    "objects": {
+      "npm": "@noflo/objects"
+    }
+  },
+  "components": [
+    {
+      "name": "yaml/ExtractFrontmatter",
+      "path": "components/ExtractFrontmatter.js",
+      "type": "elementary",
+      "description": "Extract Front Matter parts from a string",
+      "icon": "",
+      "signature": {
+        "inports": [
+          {
+            "name": "in",
+            "datatype": "string",
+            "addressable": false,
+            "description": "Front matter source",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "out",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Object with head and body parts",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": "spec/ExtractFrontmatter.yaml",
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "yaml/ParseYaml",
+      "path": "components/ParseYaml.js",
+      "type": "elementary",
+      "description": "Parse YAML to an object",
+      "icon": "",
+      "signature": {
+        "inports": [
+          {
+            "name": "in",
+            "datatype": "string",
+            "addressable": false,
+            "description": "YAML source",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "out",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Parsed YAML document",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "YAML parse errors",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": "spec/ParseYaml.yaml",
+      "assembly": false,
+      "platforms": [
+        "node"
+      ]
+    },
+    {
+      "name": "yaml/ToFrontmatter",
+      "path": "components/ToFrontmatter.js",
+      "type": "elementary",
+      "description": "Join head and body to a Front Matter string",
+      "icon": "",
+      "signature": {
+        "inports": [
+          {
+            "name": "head",
+            "datatype": "string",
+            "addressable": false,
+            "description": "Header data in YAML format",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "body",
+            "datatype": "string",
+            "addressable": false,
+            "description": "Body, typically in Markdown",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "out",
+            "datatype": "string",
+            "addressable": false,
+            "description": "Document with Front Matter head and body",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": "spec/ToFrontmatter.yaml",
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "yaml/ToYaml",
+      "path": "components/ToYaml.js",
+      "type": "elementary",
+      "description": "Convert an object to YAML",
+      "icon": "",
+      "signature": {
+        "inports": [
+          {
+            "name": "in",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Object to YAMLify",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "out",
+            "datatype": "string",
+            "addressable": false,
+            "description": "YAML representation of the object",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Objects that cannot be serialized to YAML",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": "spec/ToYaml.yaml",
+      "assembly": false,
+      "platforms": [
+        "node"
+      ]
+    },
+    {
+      "name": "yaml/ParseFrontmatter",
+      "path": "graphs/ParseFrontmatter.fbp",
+      "type": "subgraph",
+      "description": "Parse document with Front Matter metadata and send out as object with head and body",
+      "icon": "sitemap",
+      "signature": {
+        "inports": [
+          {
+            "name": "content",
+            "datatype": "all",
+            "addressable": false,
+            "description": "Packet to be forwarded",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "filename",
+            "datatype": "string",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "results",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Object forwarded from the input",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "all",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "references": [
+        "core/Split",
+        "groups/LastGroup",
+        "groups/ReadGroup",
+        "strings/SendString",
+        "objects/SetPropertyValue",
+        "yaml/ExtractFrontmatter",
+        "objects/GetObjectKey",
+        "yaml/ParseYaml",
+        "core/Merge"
+      ],
+      "platforms": [
+        "node"
+      ]
+    }
+  ]
+}
