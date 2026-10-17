@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [2.0.0-alpha.2] - 2026-10-18
+
 ### Changed
 
 - The `graphs/ParseFrontmatter` graph is re-enabled and tested: it composes the yaml components with `@noflo/core` (Split, Merge), `@noflo/groups` (LastGroup, ReadGroup), `@noflo/strings` (SendString), and `@noflo/objects` (GetObjectKey, SetPropertyValue), which are declared as runtime dependencies. Its exported ports are renamed to lowercase (`content`, `results`, `filename`, `error`) per 2.x port-name validation, and 2.x forwarding semantics preserve the innermost file-path group on the results and error streams where the 1.x graph composition stripped it
