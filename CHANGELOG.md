@@ -4,8 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [Unreleased]
+
+### Changed
+
 - The `graphs/ParseFrontmatter` graph is re-enabled and tested: it composes the yaml components with `@noflo/core` (Split, Merge), `@noflo/groups` (LastGroup, ReadGroup), `@noflo/strings` (SendString), and `@noflo/objects` (GetObjectKey, SetPropertyValue), which are declared as runtime dependencies. Its exported ports are renamed to lowercase (`content`, `results`, `filename`, `error`) per 2.x port-name validation, and 2.x forwarding semantics preserve the innermost file-path group on the results and error streams where the 1.x graph composition stripped it
+- `ExtractFrontmatter` adopts the Jekyll front-matter semantics: the fences anchor at the file start, CRLF line endings parse the same as LF, a document with front matter and no body yields an empty body, and an empty head (the fences on consecutive lines, or with a blank line between them) yields an empty head. The 1.x matcher required a newline before and after the closing fence and matched nothing on CRLF input. Semantic change: the head no longer carries the newline that followed the opening fence (the established `"\nfoo: bar"` form becomes `"foo: bar"` — the head is ready for `ParseYaml` directly), and a leading newline before the fences means no front matter (Jekyll requires them at the file start)
 
 ## [2.0.0-alpha.1] - 2026-10-08
 

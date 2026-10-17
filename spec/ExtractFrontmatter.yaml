@@ -11,7 +11,7 @@ cases:
     expect:
       out:
         equals:
-          head: "\nfoo: bar"
+          head: "foo: bar"
           body: "hello\n"
   - name: reading empty Front Matter
     assertion: should find head and body
@@ -31,3 +31,39 @@ cases:
         equals:
           head: ""
           body: "hello\n"
+  - name: front matter with no body
+    assertion: should parse the head and yield an empty body
+    inputs:
+      in: "---\ntitle: T\n---"
+    expect:
+      out:
+        equals:
+          head: "title: T"
+          body: ""
+  - name: CRLF line endings
+    assertion: should parse the same as LF
+    inputs:
+      in: "---\r\ntitle: T\r\n---\r\nbody"
+    expect:
+      out:
+        equals:
+          head: "title: T"
+          body: "body"
+  - name: empty head with a blank line between the fences
+    assertion: should yield an empty head
+    inputs:
+      in: "---\n\n---\nbody"
+    expect:
+      out:
+        equals:
+          head: ""
+          body: "body"
+  - name: a leading newline means no front matter
+    assertion: Jekyll requires the fences at the file start
+    inputs:
+      in: "\n---\nfoo: bar\n---\nx"
+    expect:
+      out:
+        equals:
+          head: ""
+          body: "\n---\nfoo: bar\n---\nx"
